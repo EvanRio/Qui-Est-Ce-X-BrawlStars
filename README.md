@@ -1,61 +1,53 @@
 # 🌟 Brawl Stars : Qui est-ce ? 🕵️‍♂️
 
 Bienvenue sur le dépôt du projet **Brawl Stars : Qui est-ce ?** ! 
-Il s'agit d'une version revisitée du célèbre jeu de société "Qui est-ce ?" (Guess Who?), mettant en vedette vos Brawlers préférés du jeu mobile à succès de Supercell.
+Il s'agit d'une version web interactive et revisitée du célèbre jeu de société "Qui est-ce ?", mettant en vedette 103 personnages issus du jeu mobile Brawl Stars.
+
+Ce projet a été codé par **[locyzz](https://locyzz.fr/)** (d'après un concept de **[Citron](https://youtube.com/@king.citron)**).
 
 ## 🎮 À propos du jeu
 
-Le principe reste fidèle au jeu classique : chaque joueur (ou le joueur contre l'ordinateur) possède un Brawler mystère. Posez des questions de déduction (ex: "Ton brawler est-il un tireur d'élite ?", "Ton brawler est-il de rareté légendaire ?") pour éliminer les personnages qui ne correspondent pas. Soyez le premier à deviner le Brawler de votre adversaire pour gagner !
+Le principe est simple : chaque joueur choisit un Brawler mystère et le note dans le champ de texte prévu à cet effet. Ensuite, posez-vous des questions à tour de rôle (ex: "Ton brawler a-t-il des lunettes ?", "Est-ce un tireur d'élite ?"). 
+
+Au fur et à mesure des réponses, cliquez sur les portraits des Brawlers pour les éliminer (une croix rouge apparaîtra dessus). Le premier à deviner le personnage de l'adversaire remporte la partie !
 
 ## ✨ Fonctionnalités
 
-*   **Casting de Brawlers :** Retrouvez une large sélection de personnages issus de l'univers de Brawl Stars.
-*   **Interface immersive :** Un design visuel inspiré des menus et des codes couleurs du jeu original.
-*   **Filtres dynamiques :** Cliquez sur les portraits pour éliminer facilement les personnages au fil des questions.
-*   *[[Ajoute ici d'autres fonctionnalités : Mode Multijoueur, Mode Solo contre l'IA, Animations, etc.]]*
-
-## 🚀 Installation et exécution
-
-Pour lancer le jeu en local sur votre machine, suivez ces étapes :
-
-1. **Cloner le dépôt :**
-   ```bash
-   git clone https://github.com/ton-nom-utilisateur/ton-repo.git
-   ```
-
-2. **Accéder au dossier :**
-   ```bash
-   cd ton-repo
-   ```
-
-3. **Lancer le jeu :**
-   *   **Si c'est un projet Web classique (HTML/CSS/JS) :** Ouvre simplement le fichier `index.html` dans ton navigateur préféré.
-   *   **Si tu utilises Node.js ou un framework (React, Vue, etc.) :**
-       ```bash
-       npm install
-       npm start
-       ```
+* **Roster Complet :** Une grille dynamique contenant 103 Brawlers.
+* **Filtre visuel interactif :** Un simple clic sur une case permet de griser/barrer un personnage éliminé.
+* **Champ de mémorisation :** Un espace pour écrire et garder en mémoire le nom de son propre personnage.
+* **100% Responsive :** L'affichage s'adapte automatiquement à votre écran, que vous soyez sur PC (grille large) ou sur Mobile (grille compacte).
+* **Interface thématique :** Utilisation de la police `Lilita One` et d'un code couleur rappelant les menus du jeu.
 
 ## 🛠️ Technologies utilisées
 
-*   [Ex: HTML5, CSS3, JavaScript Vanilla]
-*   [Ex: React.js, Tailwind CSS]
-*   *(N'oublie pas de modifier cette section avec les vrais langages/outils que tu as utilisés !)*
+Ce projet est un projet web statique léger et rapide, sans dépendances complexes :
+* **HTML5** : Structure de la page.
+* **CSS3** : Mise en page en Grid (`display: grid`), responsive design et animations visuelles.
+* **JavaScript (Vanilla)** : Génération automatique de la grille des 103 Brawlers et gestion des clics (toggle de classe).
 
-## 🤝 Contribution
+## 🚀 Installation et exécution
 
-Les contributions sont les bienvenues ! Si tu souhaites ajouter de nouveaux Brawlers, proposer de nouvelles questions ou corriger des bugs :
+Ce projet ne nécessite aucune installation de serveur ou de base de données. 
 
-1. Fork le projet.
-2. Crée une branche pour ta fonctionnalité (`git checkout -b feature/NouvelleFonctionnalite`).
-3. Commit tes changements (`git commit -m 'Ajout de la fonctionnalité X'`).
-4. Push vers la branche (`git push origin feature/NouvelleFonctionnalite`).
-5. Ouvre une Pull Request.
+1. **Cloner ou télécharger le dépôt :**
+   ```bash
+   git clone https://github.com/EvanRio/quiestcexbrawlstars.git
+   ```
 
-## 📝 Licence
+2. **Préparer les images :**
+   Assurez-vous d'avoir un dossier `images/` à la racine du projet contenant :
+   * Le logo du jeu : `logo.png`
+   * Les portraits des Brawlers nommés de `1.png` à `103.png`.
 
-Ce projet est sous licence [MIT / Apache 2.0 / etc.]. Voir le fichier `LICENSE` pour plus de détails.
+3. **Lancer le jeu :**
+   Ouvrez simplement le fichier `index.html` dans n'importe quel navigateur web (Chrome, Firefox, Safari, etc.).
 
----
+## 🤝 Crédits
+
+* **Développement Web :** [locyzz](https://locyzz.fr/)
+* **Concept Original :** [Citron sur YouTube](https://youtube.com/@king.citron)
+
+## 📝 Licence & Disclaimer
 
 **⚠️ Disclaimer :** *Ce projet est une création de fan à but non lucratif. Il n'est pas affilié, sponsorisé, ni approuvé par Supercell. Brawl Stars et ses personnages sont des marques déposées de Supercell.*
