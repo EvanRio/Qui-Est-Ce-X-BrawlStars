@@ -4,18 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qui est-ce ?</title>
+<link rel="icon" type="image/png" href="pp.png">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
 
 <style>
+:root {
+    --bg: #1e1e1e;
+    --text: #ffffff;
+    --card: #ffffff;
+    --field: #333333;
+    --bar: rgba(30, 30, 30, 0.95);
+    --accent: #ff4d4d;
+    --focus: #ffd23f;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
 body {
     margin: 0;
-    background: #1e1e1e;
-    color: white;
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Lilita One', cursive;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 90px; /* place pour la barre fixe */
+    transition: background 0.25s, color 0.25s;
 }
 
 /* CONTENEUR */
@@ -32,6 +49,23 @@ body {
     margin: 0 auto 10px;
     width: 60%;
     max-width: 300px;
+    height: auto;
+}
+
+/* LIENS (entre le logo et les cases) */
+.credits {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.credits a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.credits a:hover,
+.credits a:focus-visible {
+    text-decoration: underline;
 }
 
 /* GRID */
@@ -44,68 +78,141 @@ body {
 /* CASE */
 .case {
     aspect-ratio: 1/1;
-    background: white;
+    background: var(--card);
+    border: none;
+    padding: 0;
     border-radius: 6px;
     overflow: hidden;
     cursor: pointer;
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .case img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none;
+    transition: filter 0.3s, opacity 0.3s;
+}
+
+.case:hover {
+    transform: scale(1.05);
+    z-index: 1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.case:focus-visible,
+.btn:focus-visible,
+.input-container input:focus-visible,
+.credits a:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+/* Croix : image assombrie + vraie croix qui apparait */
+.case.croix img {
+    filter: grayscale(1) brightness(0.45);
+}
+
+.case::after {
+    content: "✕";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(36px, 7vw, 64px);
+    line-height: 1;
+    color: var(--accent);
+    text-shadow: 0 0 4px #000, 0 0 10px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transform: scale(0.3) rotate(-25deg);
+    transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
 }
 
 .case.croix::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(255,0,0,0.5);
+    opacity: 1;
+    transform: scale(1) rotate(0);
 }
 
-/* INPUT */
+/* BARRE FIXE EN BAS (nom + nouvelle partie) */
 .input-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--bar);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     text-align: center;
-    margin: 20px 0;
+    box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.input-container input::placeholder {
+    color: var(--text);
+    opacity: 0.5;
+}
+
+.input-row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 8px;
 }
 
 .input-container input {
     padding: 10px;
     border-radius: 6px;
+    border: 2px solid transparent;
+    background: var(--field);
+    color: var(--text);
+    font-family: 'Lilita One', cursive;
+    font-size: 16px; /* evite le zoom automatique sur iOS */
+    text-transform: uppercase;
+    min-width: 0;
+    flex: 0 1 280px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
     border: none;
-    background: #333;
-    color: white;
-    font-family: 'Lilita One';
+    border-radius: 6px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Lilita One', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.15s, filter 0.15s;
 }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    margin-bottom: 10px;
-}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { transform: scale(0.96); }
 
-.footer a {
-    color: white;
-    text-decoration: none;
-}
-
-/* 💻 PC → plus de colonnes = moins zoom */
+/* PC : plus de colonnes = moins zoom */
 @media (min-width: 1200px) {
-    .container {
-        max-width: 1600px;
-    }
-
-    .grid {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-    }
+    .container { max-width: 1600px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); }
 }
 
-/* 📱 MOBILE */
+/* MOBILE */
 @media (max-width: 500px) {
-    .grid {
-        grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
-    }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
 }
 </style>
 </head>
@@ -114,31 +221,97 @@ body {
 
 <div class="container">
 
-<img src="images/logo.png" class="logo">
+<img src="images/logo.png" class="logo" alt="Qui est-ce ?" width="300" height="100">
 
-<div class="grid">
-<script>
-for (let i = 1; i <= 103; i++) {
-    document.write(`
-        <div class="case" onclick="this.classList.toggle('croix')">
-            <img src="images/${i}.png">
-        </div>
-    `);
-}
-</script>
+<div class="credits">
+    <a href="https://locyzz.fr/" target="_blank" rel="noopener">Site créé par locyzz</a> •
+    <a href="https://youtube.com/@king.citron" target="_blank" rel="noopener">Concept de Citron</a>
+</div>
+
+<div class="grid" id="grid"></div>
+
 </div>
 
 <div class="input-container">
-    <div>Nom du personnage choisi :</div>
-    <input type="text">
+    <div class="input-row">
+        <input type="text" id="nom" placeholder="Nom du personnage choisi" aria-label="Nom du personnage choisi" autocomplete="off" autocapitalize="characters" spellcheck="false">
+        <button type="button" class="btn" id="reset">Nouvelle partie</button>
+    </div>
 </div>
 
-</div>
+<script>
+const TOTAL = 109;
+const KEY = 'quiestce-croix';
+const grid = document.getElementById('grid');
+const nom = document.getElementById('nom');
 
-<div class="footer">
-    <a href="https://locyzz.fr/" target="_blank">Site créé par locyzz</a> •
-    <a href="https://youtube.com/@king.citron" target="_blank">Concept de Citron</a>
-</div>
+/* ---------- Sauvegarde ---------- */
+function load() {
+    try {
+        return JSON.parse(localStorage.getItem(KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function save() {
+    const state = [];
+    grid.querySelectorAll('.case').forEach((c, idx) => {
+        if (c.classList.contains('croix')) state.push(idx + 1);
+    });
+    try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+    } catch (e) {}
+}
+
+/* ---------- Génération de la grille ---------- */
+const saved = load();
+const frag = document.createDocumentFragment();
+
+for (let i = 1; i <= TOTAL; i++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'case' + (saved.includes(i) ? ' croix' : '');
+    btn.setAttribute('aria-pressed', saved.includes(i));
+    btn.setAttribute('aria-label', 'Personnage ' + i);
+
+    const img = document.createElement('img');
+    img.src = 'images/' + i + '.png';
+    img.alt = 'Personnage ' + i;
+    img.width = 85;
+    img.height = 85;
+    img.loading = 'lazy';
+    btn.appendChild(img);
+
+    btn.addEventListener('click', () => {
+        const on = btn.classList.toggle('croix');
+        btn.setAttribute('aria-pressed', on);
+        save();
+    });
+
+    frag.appendChild(btn);
+}
+grid.appendChild(frag);
+
+/* ---------- Nouvelle partie ---------- */
+document.getElementById('reset').addEventListener('click', () => {
+    if (!confirm('Commencer une nouvelle partie ?')) return;
+    grid.querySelectorAll('.case').forEach(c => {
+        c.classList.remove('croix');
+        c.setAttribute('aria-pressed', 'false');
+    });
+    nom.value = '';
+    save();
+});
+
+/* ---------- Nom en MAJUSCULES ---------- */
+nom.addEventListener('input', () => {
+    const start = nom.selectionStart;
+    const end = nom.selectionEnd;
+    nom.value = nom.value.toUpperCase();
+    nom.setSelectionRange(start, end);
+});
+</script>
 
 </body>
 </html>
